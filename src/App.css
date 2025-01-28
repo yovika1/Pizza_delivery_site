@@ -1,38 +1,62 @@
-.App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+.sliding-video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1;
+    animation: slide 80s linear infinite alternate;
   }
-}
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+  @keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
   }
-  to {
-    transform: rotate(360deg);
-  }
-}
+/*   
+  <Avatar
+  src={pizza}
+  alt="Pizza"
+  sx={{
+    width:{
+      xs:66,
+      sm:80,
+      md:93 
+    },
+    height:{
+      xs:50,
+      sm:70,
+      md:85
+    },
+    margin: "0 auto 20px",
+    backgroundColor: "transparent",
+  }}
+  <Box
+  sx={{
+    height: {
+      xs: '30vh',
+      sm: '38vh',
+      md: '44vh',
+    },
+    top:{
+      xs:"12vh",
+      sm:50,
+      md:-98
+    },
+    position: 'absolute',
+    mr:7
+  }}
+>
+  <img
+    src={chefImage}
+    alt="Chef"
+    style={{
+      borderRadius: '50%',
+      width: '100%', // Automatically adapts to the Box's height and maintains aspect ratio.
+      height: '100%',
+    }}
+  /> */
