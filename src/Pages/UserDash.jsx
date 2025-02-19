@@ -1,6 +1,6 @@
 import "../App.css"; // Import the CSS file
 import React from "react";
-import {Box,Grid,Typography,Card,CardContent,Button,Avatar,AppBar,Toolbar,IconButton,
+import {Box,Grid,Typography,Card,CardContent,Button,Avatar,Toolbar,IconButton,
 } from "@mui/material";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 
@@ -52,7 +52,6 @@ import { useNavigate } from "react-router-dom";
           </Typography>
           
         </Toolbar>
-      {/* </AppBar> */}
 
       {/* Header Section */}
       <Box textAlign="center" sx={{ py: 5, color: " rgba(255, 204, 128, 0.7)" }}>
@@ -60,11 +59,7 @@ import { useNavigate } from "react-router-dom";
         <Typography variant="h3" color="secondary">
           Manage your orders, customize pizzas, and delight your customers!
         </Typography>
-      </Box>
-
-      {/* Dashboard Cards */}
-   
-
+      </Box>   
 
         {/* Custom Pizza Card */}
         <Grid item xs={12} sm={6} lg={4}>
