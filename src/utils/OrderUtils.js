@@ -1,11 +1,16 @@
 import { useNavigate } from "react-router-dom";
 
-export const OrderNow = () => {
+export const useOrderNow = () => {
   const navigate = useNavigate();
 
-  return (image, name, description, price) => {
-    const data = [{ image, name, description, price }];
-    localStorage.setItem("pizza", JSON.stringify(data));
-    navigate("/order-details");
+  return (items) => {
+    if (!items || items.length === 0) {
+      console.error("No items to order.");
+      return;
+    }
+
+    localStorage.setItem("pizza", JSON.stringify(items)); 
+    localStorage.removeItem("pizzaPrice")
+    navigate("/order-details"); 
   };
 };

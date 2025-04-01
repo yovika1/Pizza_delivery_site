@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import { Box, Button, TextField, Typography } from "@mui/material";
 import axios from "axios";
 
- export const OTPInput = ({ email, onClose }) => {
+ export const OTPInput = ({ email }) => {
   const [otp, setOtp] = useState(["", "", "", ""]);
-  const [enteredOtp, setEnteredOtp] = useState(false); // Show OTP UI after OTP is sent
+  const [enteredOtp, setEnteredOtp] = useState(false); 
 
   const handleChange = (value, index) => {
     const updatedOtp = [...otp];
@@ -42,7 +42,6 @@ import axios from "axios";
 
   const handleResendOtp  = async () => {
     try {
-      // Simulate sending OTP
       const response = await axios.post("http://localhost:8000/login", {
         Email: email,
       });

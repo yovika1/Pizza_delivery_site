@@ -1,12 +1,26 @@
 import React from "react";
 import { useCart } from "../context/CartContext";
 import { Card, CardContent, Typography, Button, Box, CardMedia } from "@mui/material";
-import { OrderNow } from "../utils/OrderUtils";
+import { useNavigate } from "react-router-dom";
 
-export const CartSection = ({image, name, description, price}) => {
-  const { cartItems, getTotalPrice, updateQuantity, removeFromCart } = useCart();
+export const CartSection = () => {
+  const { cartItems, getTotalPrice, updateQuantity, removeCartItem } = useCart();
+  const navigate = useNavigate();
 
-  const handleOrderNow = OrderNow();
+  const handleOrder = (item) => {
+    localStorage.setItem("pizza", JSON.stringify([item])); 
+    navigate("/order-details");
+  };
+
+  const handleOrderAll = () => {
+    if (!cartItems || cartItems.length === 0) {
+      console.error("Cart is empty, cannot place an order.");
+      return;
+    }
+    localStorage.setItem("pizza", JSON.stringify(cartItems));
+    navigate("/order-details");
+  };
+
   return (
     <div>
       <h2>Your Cart</h2>
@@ -16,22 +30,22 @@ export const CartSection = ({image, name, description, price}) => {
         <>
           {cartItems.map((item) => (
             <Card key={item._id} sx={{ marginBottom: 4, padding: 2 }}>
-              <CardContent >
-              <CardMedia
-                            component="img"
-                            image={item.image}
-                            alt={item.name}
-                            sx={{
-                              height: 40,
-                              width: 40,
-                              borderRadius: "8px",
-                              marginRight: 2,
-                            }}
-                          />
+              <CardContent>
+                <CardMedia
+                  component="img"
+                  image={item.image}
+                  alt={item.name}
+                  sx={{
+                    height: 40,
+                    width: 40,
+                    borderRadius: "8px",
+                    marginRight: 2,
+                  }}
+                />
                 <Typography variant="h6">{item.name}</Typography>
                 <Typography variant="body2">Price: ₹{item.price}</Typography>
                 <Typography variant="body2">Quantity: {item.quantity}</Typography>
-                
+
                 <Box sx={{ display: "flex", gap: "8px", marginTop: "10px", alignItems: "center" }}>
                   <Button
                     variant="contained"
@@ -57,22 +71,36 @@ export const CartSection = ({image, name, description, price}) => {
                     color="error"
                     size="small"
                     sx={{ minWidth: "30px", padding: "5px", backgroundColor: "#d32f2f" }}
-                    onClick={() => removeFromCart(item._id)}
+                    onClick={() => removeCartItem(item._id)} // Fixed function name
                   >
                     🗑️
                   </Button>
                 </Box>
+
+                <Button
+                  variant="contained"
+                  onClick={() => handleOrder(item)} // Fixed function call
+                  color="success"
+                  sx={{ marginTop: "10px" }}
+                >
+                  Order Now
+                </Button>
               </CardContent>
             </Card>
           ))}
+
           <h3>Total Price: ₹{getTotalPrice().toFixed(2)}</h3>
+
           <Button 
-          onClick={() => handleOrderNow(image, name, description, price)}
-          variant="contained"
-        >Place Order</Button>
+            onClick={handleOrderAll}
+            variant="contained"
+            color="success"
+            sx={{ marginTop: "20px", width: "100%" }}
+          >
+            Place Orders
+          </Button>
         </>
       )}
     </div>
   );
 };
-

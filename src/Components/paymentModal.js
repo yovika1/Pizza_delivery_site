@@ -23,18 +23,7 @@ const PaymentModal = ({ open, close, price, clientSckey }) => {
       aria-labelledby="payment-modal"
       aria-describedby="stripe-payment-form"
     >
-      <Box
-        sx={{
-          width: 400,
-          bgcolor: "white",
-          p: 3,
-          mx: "auto",
-          my: "15%",
-          borderRadius: 2,
-          boxShadow: 24,
-        }}
-      >
-        <h2 id="payment-modal">Complete Your Payment</h2>
+      
 
         {!clientSckey ? (
           <CircularProgress />
@@ -43,7 +32,7 @@ const PaymentModal = ({ open, close, price, clientSckey }) => {
             <Checkout open={open} close={close} price={price} />
           </Elements>
         )}
-      </Box>
+      
     </Modal>
   );
 };

@@ -16,6 +16,7 @@ export const Footer = () => {
   return (
     <Box sx={{ backgroundColor: "#FAFAFA" }}>
       <BottomNavigation
+      
         sx={{
           mt: 2,
           position: "fixed",

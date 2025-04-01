@@ -40,13 +40,12 @@ export const CartProvider = ({ children }) => {
     return cartItems.reduce((total, item) => total + item.price * item.quantity, 0);
   };
 
-  const clearCart = () => {
-    setCartItems([]);
+  const removeCartItem = (id) => {
+    setCartItems((prevCart)=> prevCart.filter((item) => item._id !== id))
     localStorage.removeItem("cartItems");
   };
-
   return (
-    <CartContext.Provider value={{ cartItems, addToCart, updateQuantity, getTotalPrice, clearCart }}>
+    <CartContext.Provider value={{ cartItems, addToCart, updateQuantity, getTotalPrice, removeCartItem }}>
       {children}
     </CartContext.Provider>
   );

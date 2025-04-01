@@ -1,20 +1,18 @@
 import React from "react";
-import {
-  Card,
-  CardContent,
-  CardMedia,
-  Typography,
-  Button,
-  Box,
-} from "@mui/material";
+import { Card, CardContent, CardMedia, Typography, Button, Box } from "@mui/material";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import { useCart } from "../context/CartContext";
-import { OrderNow } from "../utils/OrderUtils";
+import { useOrderNow } from "../utils/OrderUtils";
 
-export const PizzaDashboard = ({ image, name, description, price }) => {
+export const PizzaDashboard = ({ image, name, description, price ,_id}) => {
   const { addToCart } = useCart();
+  const orderNow = useOrderNow()
 
-  const handleOrderNow = OrderNow();
+
+  const handleOrder = () => {
+    orderNow([{ image, name, description, price , _id}]); 
+  };
+
   return (
     <Box
       sx={{
@@ -76,7 +74,7 @@ export const PizzaDashboard = ({ image, name, description, price }) => {
           </Typography>
           <Button
             variant="contained"
-            onClick={() => handleOrderNow(image, name, description, price)}
+            onClick={handleOrder}
             color="warning"
             sx={{ marginTop: "12px", borderRadius: "20px", fontWeight: "bold" }}
           >
@@ -84,7 +82,7 @@ export const PizzaDashboard = ({ image, name, description, price }) => {
           </Button>
           <AddCircleIcon
             fontSize="small"
-            onClick={() => addToCart({ image, name, description, price, _id: name })}
+            onClick={() => addToCart({ image, name, description, price, _id })}
             sx={{ display: "flex", mt: "-29px", ml: "80%", cursor: "pointer" }}
           />
         </CardContent>
@@ -92,4 +90,3 @@ export const PizzaDashboard = ({ image, name, description, price }) => {
     </Box>
   );
 };
-
